@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Arc Bounds</title>
+
+    <script src="../../build/main.js"></script>
+</head>
+<body>
+
+<canvas width="800" height="600" id="canvas"></canvas>
+
+<script>
+
+  const {Game, Graph} = huixi;
+  const game = new Game(document.getElementById('canvas'));
+  const graphA = new Graph();
+  const graphB = new Graph();
+  const graphC = new Graph();
+  const graphD = new Graph();
+  const debug = new Graph();
+  const graphs = [graphA, graphB, graphC, graphD];
+
+  game.drawOrder.push(...graphs, debug);
+
+  let r = 1;
+
+  game.onTick.add(() => {
+    graphs.forEach(graph => graph.clear());
+
+    const cos = Math.cos(r);
+    const sin = Math.sin(r);
+
+    graphA.transform(cos, sin, -sin * 0.5, cos, 200, 200);
+    graphB.transform(cos, sin, -sin * 0.3, cos, 200, 400);
+    graphC.transform(cos, sin, -sin * 0.2, cos, 600, 200);
+    graphD.transform(cos, sin, -sin * 0.6, cos, 600, 400);
+
+    graphA.arc(0, 0, 80, -r * 0.5, r * 0.9, true);
+    graphB.arc(0, 0, 80, r * 0.4, -r * 0.8, true);
+    graphC.arc(0, 0, 80, -r * 0.7, r * 0.3, false);
+    graphD.arc(0, 0, 80, r * 0.5, -r * 0.9, false);
+
+    graphs.forEach(arc => arc.stroke());
+
+    debug.clear();
+    debug.fillStyle = 'rgba(0, 0, 0, 0.2)';
+    graphs.forEach(graph => debug.fillRect(graph.bounds.x, graph.bounds.y, graph.bounds.width, graph.bounds.height));
+
+    r = r % 10 + 0.01;
+  });
+
+</script>
+
+</body>
+</html>

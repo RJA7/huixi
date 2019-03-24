@@ -1,0 +1,24 @@
+<exporter version="1.0">
+    <name>huixi</name>
+    <nameAlias>huixi-exporter</nameAlias>
+    <displayName>Huixi</displayName>
+    <description>Huixi exporter for Texture Packer</description>
+    <version>1.0</version>
+    <files>
+        <file>
+            <name>huixi-json</name>
+            <displayName>Huixi JS</displayName>
+            <fileExtension>js</fileExtension>
+            <description>Huixi exporter JS data file</description>
+            <template>exporter.json</template>
+        </file>
+    </files>
+    <supportsTrimming>true</supportsTrimming>
+    <supportsRotation>no</supportsRotation>
+    <rotationDirection>cw</rotationDirection>
+    <supportsNPOT>true</supportsNPOT>
+    <supportsTrimSpriteNames>true</supportsTrimSpriteNames>
+    <supportsTextureSubPath>no</supportsTextureSubPath>
+    <supportsPivotPoint>true</supportsPivotPoint>
+    <supportsScale9>true</supportsScale9>
+</exporter>

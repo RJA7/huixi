@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ellipse Bounds</title>
+
+    <script src="../../build/main.js"></script>
+</head>
+<body>
+
+<canvas width="800" height="600" id="canvas"></canvas>
+
+<script>
+
+  const {Game, Graph} = huixi;
+  const game = new Game(document.getElementById('canvas'));
+  const graphA = new Graph();
+  const debug = new Graph();
+  const graphs = [graphA];
+
+  game.drawOrder.push(...graphs, debug);
+
+  let r = 1;
+
+  game.onTick.add(() => {
+    graphs.forEach(graph => graph.clear());
+
+    const cos = Math.cos(r);
+    const sin = Math.sin(r);
+
+    graphA.lineWidth = 10;
+    graphA.transform(cos, sin, -sin * 0.5, cos, 200, 200);
+    graphA.ellipse(20, 20, 80, 40, r, -r * 0.5, r * 0.9, true);
+
+    graphs.forEach(graph => graph.stroke());
+
+    debug.clear();
+    debug.fillStyle = 'rgba(0, 0, 0, 0.2)';
+    graphs.forEach(graph => debug.fillRect(graph.bounds.x, graph.bounds.y, graph.bounds.width, graph.bounds.height));
+
+    r = r + 0.01;
+  });
+
+</script>
+
+</body>
+</html>
